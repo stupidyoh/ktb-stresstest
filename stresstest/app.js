@@ -11,7 +11,7 @@ const email = "test@test9.com";
 const domain = "@test.com";
 const chatName = "asdfasdf";
 const site = "https://ktb-chat.goorm.io/";
-const filename = '/Users/goorm/Desktop/test.jpeg';
+const filename = '';
 const aiMention = "@wayneAI";
 const findText = "hello";
 const reaction = "🥴";
@@ -124,4 +124,4 @@ const main = async () => {
 
 main();
 
-module.exports = { loginUser };
+module.exports = { registerUser, loginUser, createNewChat, scrollChat, sendMessageToChat, reactionToMessage, uploadFileToChat, updateProfileImage, generateChatAiResponse };
