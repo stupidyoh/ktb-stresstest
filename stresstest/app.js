@@ -11,7 +11,7 @@ const email = "test@test9.com";
 const domain = "@test.com";
 const chatName = "asdfasdf";
 const site = "https://ktb-chat.goorm.io/";
-const filename = '';
+const filename = './photo/test.jpeg';
 const aiMention = "@wayneAI";
 const findText = "hello";
 const reaction = "🥴";
@@ -102,26 +102,26 @@ const generateChatAiResponse = async () => {
   await generateAiResponse(page, aiMention);
 };
 
-const run = async () => {
-  // await loginUser();
-  // await createNewChat();
-  // await scrollChat();
-  // await sendMessageToChat();
-  // await reactionToMessage();
-  await uploadFileToChat();
-  // await updateProfileImage();
-  // await generateChatAiResponse();
-};
+// const run = async () => {
+//   // await loginUser();
+//   // await createNewChat();
+//   // await scrollChat();
+//   // await sendMessageToChat();
+//   // await reactionToMessage();
+//   await uploadFileToChat();
+//   // await updateProfileImage();
+//   // await generateChatAiResponse();
+// };
 
-const main = async () => {
-  await run();
+// const main = async () => {
+//   await run();
 
-  if (browserInstance) {
-    await browserInstance.close();
-    console.log("Browser closed");
-  }
-};
+//   if (browserInstance) {
+//     await browserInstance.close();
+//     console.log("Browser closed");
+//   }
+// };
 
-main();
+// main();
 
 module.exports = { registerUser, loginUser, createNewChat, scrollChat, sendMessageToChat, reactionToMessage, uploadFileToChat, updateProfileImage, generateChatAiResponse };
