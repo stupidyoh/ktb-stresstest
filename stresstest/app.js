@@ -30,7 +30,7 @@ function generateGroupName() {
 
 const getPage = async () => {
   if (!browserInstance) {
-    browserInstance = await chromium.launch({ headless: false });
+    browserInstance = await chromium.launch({ headless: true });
     console.log("Browser launched");
   }
 

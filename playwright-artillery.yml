@@ -9,7 +9,7 @@ config:
     playwright:
       extednedMetrics: false
       launchOptions:
-        headless: false
+        headless: true
     
   processor: "./stresstest/app.js"
 
