@@ -1,9 +1,4 @@
 const addUser = async (page, id, passwd, email) => {
-    if (page.url() !== 'https://bootcampchat-fe.run.goorm.site/') {
-      console.error('This page is not bootcampchat-fe');
-      return;
-    }
-  
     await page.getByRole('navigation').getByRole('button', { name: '회원가입' }).click();
     await page.getByPlaceholder('이름을 입력하세요').click();
     await page.getByPlaceholder('이름을 입력하세요').fill(id);
@@ -20,10 +15,6 @@ const addUser = async (page, id, passwd, email) => {
   };
   
   const login = async (page, email, passwd) => {
-    if (page.url() !== 'https://bootcampchat-fe.run.goorm.site/') {
-      console.error('This page is not bootcampchat-fe');
-      return;
-    }
     await page.waitForLoadState('networkidle');
     await page.getByPlaceholder('이메일을 입력하세요').click();
     await page.getByPlaceholder('이메일을 입력하세요').fill(email);

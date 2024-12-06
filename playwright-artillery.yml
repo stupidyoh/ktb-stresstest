@@ -2,8 +2,8 @@ config:
   target: https://bootcampchat-fe.run.goorm.site
 
   phases:
-  - duration: 1
-    arrivalRate: 1
+  - duration: 2
+    arrivalRate: 2
 
   engines:
     playwright:
@@ -14,6 +14,5 @@ config:
   processor: "./stresstest/app.js"
 
 scenarios:
-  - name: "goorm Stresstest"
-    engine: playwright
-    testFunction: {{ testfunction }}
+  - engine: playwright
+    flowFunction: "test"

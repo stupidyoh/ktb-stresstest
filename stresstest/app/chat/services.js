@@ -1,26 +1,24 @@
 const random = require('random');
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 const accessChat = async (page, chatName) => {
-  if (page.url() !== 'https://bootcampchat-fe.run.goorm.site/chat-rooms') {
-    console.info('This page is not chat-rooms');
-    return;
-  }
-  const rows = page.locator('tr');
-  const targetRow = rows.filter({ hasText: chatName });
+  await page.waitForTimeout(3000);
+  console.log(page.url());
+  
+  const rows = await page.locator('tr');
+  const targetRow = await rows.filter({ hasText: chatName });
 
   await targetRow.locator("button:has-text('입장')").first().click();
-  await page.waitForTimeout(10000);
+  await page.waitForTimeout(3000);
 
   console.info('Chat accessed');
 };
 
 
 const createChat = async (page, chatName) => {
-  if (page.url() !== 'https://bootcampchat-fe.run.goorm.site/chat-rooms') {
-    console.info('This page is not chat-rooms');
-    return;
-  }
-
   const newChatButton = page.getByRole('button', { name: '새 채팅방' });
   await newChatButton.click();
 
@@ -30,15 +28,11 @@ const createChat = async (page, chatName) => {
   const createChatButton = page.getByRole('button', { name: '채팅방 만들기' });
   await createChatButton.click();
 
-  await page.waitForTimeout(10000);
+  await page.waitForTimeout(3000);
   console.info('Chat created');
 };
 
 const talkChat = async (page, text) => {
-  if (!page.url().includes('https://bootcampchat-fe.run.goorm.site/chat?room=')) {
-    console.info('This page is not rooms');
-    return;
-  }
   const messageInput = page.getByPlaceholder('메시지를 입력하세요... (@를 입력하여 멘션,');
   const sendButton = page.getByRole('button', { name: '메시지 보내기' });
 
@@ -51,45 +45,40 @@ const talkChat = async (page, text) => {
 };
 
 const addReactions = async (page, findText, reaction) => {
-  if (!page.url().includes('https://bootcampchat-fe.run.goorm.site/chat?room=')) {
-    console.info('This page is not rooms');
-    return;
-  }
-
+  await sleep(5000);
+  console.log("addreactions"+await page.url());
   const messagesLocator = await page.locator('div.messages');
   const messages = await messagesLocator.all();
   for (let message of messages) {
+    console.log(message);
+    await sleep(2000);
     const messageText = await message.locator('div.message-content').innerText();
     if (messageText.includes(findText)) {
       const reactionButton = await message.locator('button[title="리액션 추가"]');
       if (await reactionButton.isVisible()) {
+        await sleep(2000);
         await reactionButton.click();
-
         const reactions = await page.locator(`button[aria-label="${reaction}"]`).all();
-
         if (reactions.length === 1) {
           await reactions[0].click();
           console.info('Reaction added');
+          await sleep(1000);
         } else {
           const allReactions = await page.locator('button[aria-label]').all();
           if (allReactions.length > 0) {
+            await page.waitForTimeout(1000);
             const randomReactionIndex = Math.floor(Math.random() * allReactions.length);
             await allReactions[randomReactionIndex].click();
             console.info('Random reaction added');
           }
         }
-        await page.waitForTimeout(2000);
+        await sleep(2);
       }
     }
   }
 };
 
 const scrollDown = async (page) => {
-  if (page.url() !== 'https://bootcampchat-fe.run.goorm.site/chat-rooms') {
-    console.info(`This page is not chat-rooms: ${page.url()}`);
-    return;
-  }
-
   const tableHeader = page.locator('#table-wrapper table thead tr');
   const boundingBox = await tableHeader.boundingBox();
   if (!boundingBox) {
@@ -117,11 +106,6 @@ const { expect } = require('@playwright/test');
 const path = require('path');
 
 const uploadFile = async (page, filename) => {
-  if (!page.url().includes('https://bootcampchat-fe.run.goorm.site/chat?room=')) {
-    console.info('This page is not rooms');
-    return;
-  }
-
   const [fileChooser] = await Promise.all([
     page.waitForEvent('filechooser'),
     page.click('//*[@id="__next"]/div/main/div/article/footer/div/div/div[3]/div/button[2]'),
