@@ -124,4 +124,4 @@ const main = async () => {
 
 main();
 
-module.exports = { registerUser, loginUser, createNewChat, scrollChat, sendMessageToChat, reactionToMessage, uploadFileToChat, updateProfileImage, generateChatAiResponse };
+module.exports = { loginUser };
