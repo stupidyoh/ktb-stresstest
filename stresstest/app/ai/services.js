@@ -6,6 +6,7 @@ const generateAiResponse = async (page, aiMention) => {
   await sendButton.click();
 
   console.info('AI response generated.');
+  await page.waitForTimeout(5000);
 };
 
 module.exports = { generateAiResponse };

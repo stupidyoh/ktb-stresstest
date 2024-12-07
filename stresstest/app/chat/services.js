@@ -1,13 +1,6 @@
-const random = require('random');
+const path = require('path');
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-const accessChat = async (page, chatName) => {
-  await page.waitForTimeout(3000);
-  console.log(page.url());
-  
+const accessChat = async (page, chatName) => {    
   const rows = await page.locator('tr');
   const targetRow = await rows.filter({ hasText: chatName });
 
@@ -16,7 +9,6 @@ const accessChat = async (page, chatName) => {
 
   console.info('Chat accessed');
 };
-
 
 const createChat = async (page, chatName) => {
   const newChatButton = page.getByRole('button', { name: '새 채팅방' });
@@ -32,6 +24,7 @@ const createChat = async (page, chatName) => {
   console.info('Chat created');
 };
 
+
 const talkChat = async (page, text) => {
   const messageInput = page.getByPlaceholder('메시지를 입력하세요... (@를 입력하여 멘션,');
   const sendButton = page.getByRole('button', { name: '메시지 보내기' });
@@ -45,39 +38,41 @@ const talkChat = async (page, text) => {
 };
 
 const addReactions = async (page, findText, reaction) => {
-  await sleep(5000);
-  console.log("addreactions"+await page.url());
+  // 채팅방 목록에 접근했을 때의 문자열만 이모지 추가
+  // 모든 글이 필요하면 맨 위 휠로 접근해서 진행 필요
+  await page.waitForTimeout(2000);
   const messagesLocator = await page.locator('div.messages');
   const messages = await messagesLocator.all();
-  for (let message of messages) {
-    console.log(message);
-    await sleep(2000);
-    const messageText = await message.locator('div.message-content').innerText();
-    if (messageText.includes(findText)) {
-      const reactionButton = await message.locator('button[title="리액션 추가"]');
-      if (await reactionButton.isVisible()) {
-        await sleep(2000);
-        await reactionButton.click();
-        const reactions = await page.locator(`button[aria-label="${reaction}"]`).all();
-        if (reactions.length === 1) {
-          await reactions[0].click();
-          console.info('Reaction added');
-          await sleep(1000);
-        } else {
-          const allReactions = await page.locator('button[aria-label]').all();
-          if (allReactions.length > 0) {
-            await page.waitForTimeout(1000);
-            const randomReactionIndex = Math.floor(Math.random() * allReactions.length);
-            await allReactions[randomReactionIndex].click();
-            console.info('Random reaction added');
+  console.log("message count: ",messages.length);
+  await Promise.all(
+      messages.map(async (message) => {
+          try {
+              const messageText = await message.locator('div.message-content').innerText();
+              if (!messageText.includes(findText)) return;
+  
+              const reactionButton = await message.locator('button[title="리액션 추가"]');
+              if (!await reactionButton.isVisible()) return;
+  
+              await reactionButton.click();
+              const allReactions = await page.locator('button[aria-label]').all();
+              if (allReactions.length > 0) {
+                  const randomReactionIndex = Math.floor(Math.random() * allReactions.length);
+                  const randomReaction = allReactions[randomReactionIndex];
+  
+                  if (await randomReaction.isVisible()) {
+                      await randomReaction.click({ force: true });
+                      console.info(`${randomReactionIndex} Random reaction added`);
+                  } else {
+                      console.warn('Reaction not visible, skipping');
+                  }
+              }
+          } catch (error) {
+              console.error('Error processing message:', error);
           }
-        }
-        await sleep(2);
-      }
-    }
-  }
-};
-
+      })
+      );
+  };
+  
 const scrollDown = async (page) => {
   const tableHeader = page.locator('#table-wrapper table thead tr');
   const boundingBox = await tableHeader.boundingBox();
@@ -102,13 +97,12 @@ const scrollDown = async (page) => {
   }
 };
 
-const { expect } = require('@playwright/test');
-const path = require('path');
+
 
 const uploadFile = async (page, filename) => {
   const [fileChooser] = await Promise.all([
-    page.waitForEvent('filechooser'),
-    page.click('//*[@id="__next"]/div/main/div/article/footer/div/div/div[3]/div/button[2]'),
+      page.waitForEvent('filechooser'),
+      page.click('//*[@id="__next"]/div/main/div/article/footer/div/div/div[3]/div/button[2]'),
   ]);
 
   await fileChooser.setFiles(path.resolve(filename));

@@ -10,21 +10,19 @@ const passwd = "123123";
 const email = "test@test9.com";
 const domain = "@test.com";
 const chatName = "asdfasdf";
-const site = "https://ktb-chat.goorm.io/";
+const site = "https://bootcampchat-fe.run.goorm.site";
 const filename = './photo/test.jpeg';
 const aiMention = "@wayneAI";
 const findText = "hello";
-const reaction = "🥴";
 const msg = "hello";
 const group = "group_a";
 
 let browserInstance = null;
 let pageInstance = null;
 
-function generateGroupName() {
+async function generateGroupName() {
   const timestamp = Date.now();
   const hash = crypto.createHash('sha256').update(timestamp.toString()).digest('hex');
-  // return `${group}_${timestamp}_${hash}`;
   return `${group}_${timestamp}`;
 }
 
@@ -42,23 +40,19 @@ const getPage = async () => {
   return pageInstance;
 };
 
-const registerUser = async () => {
-  const email = generateGroupName() + domain;
-  const id = generateGroupName();
-  const page = await getPage();
-
+async function registerUser(page) {
+  await page.goto(site);
+  id = await generateGroupName();
+  email = id + domain;
   await addUser(page, id, passwd, email);
-  return email, page;
 };
 
-const loginUser = async () => {
-  email, page = await registerUser();
-
+const loginUser = async (page) => {
+  await login(page, email, passwd);
 };
 
-const createNewChat = async () => {
-  email, page = await registerUser();
-
+async function createNewChat(page) {
+  await registerUser(page);
   await createChat(page, chatName);
 };
 
@@ -75,11 +69,11 @@ const sendMessageToChat = async () => {
   await talkChat(page, msg);
 };
 
-const reactionToMessage = async () => { // 검증
-  email, page = await registerUser();
+async function reactionToMessage(page) {
+  email = await registerUser();
 
   await accessChat(page, chatName);
-  await addReactions(page, findText, reaction);
+  await addReactions(page, findText);
 };
 
 const uploadFileToChat = async () => {
@@ -89,7 +83,7 @@ const uploadFileToChat = async () => {
   await uploadFile(page, filename);
 };
 
-const updateProfileImage = async () => { // 검증
+const updateProfileImage = async () => {
   email, page = await registerUser();
 
   await addProfileImage(page, filename);
