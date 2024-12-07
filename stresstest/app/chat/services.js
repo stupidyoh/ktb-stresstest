@@ -73,31 +73,37 @@ const addReactions = async (page, findText, reaction) => {
       );
   };
   
-const scrollDown = async (page) => {
-  const tableHeader = page.locator('#table-wrapper table thead tr');
-  const boundingBox = await tableHeader.boundingBox();
-  if (!boundingBox) {
-    console.info('Bounding box not found for the element.');
-    return;
-  }
-
-  await page.mouse.move(
-    boundingBox.x + boundingBox.width / 2,
-    boundingBox.y + boundingBox.height / 2
-  );
-
-  console.info('Scroll started');
-  try {
-    while (true) {
-      await page.mouse.wheel(0, 100);
-      await page.waitForTimeout(500);
+  const scrollDown = async (page) => {
+    const tableHeader = page.locator('#table-wrapper table thead tr');
+    const boundingBox = await tableHeader.boundingBox();
+    if (!boundingBox) {
+      console.info('Bounding box not found for the element.');
+      return;
     }
-  } catch (e) {
-    console.info(`Scrolling stopped manually. Error: ${e}`);
-  }
-};
-
-
+  
+    await page.mouse.move(
+      boundingBox.x + boundingBox.width / 2,
+      boundingBox.y + boundingBox.height / 2
+    );
+  
+    console.info('Scroll started');
+    let stopScrolling = false;
+  
+    setTimeout(() => {
+      console.info('Scroll stopped after 5 seconds.');
+      stopScrolling = true;
+    }, 10000);
+  
+    try {
+      while (!stopScrolling) {
+        await page.mouse.wheel(0, 100);
+        await page.waitForTimeout(500);
+      }
+    } finally {
+      console.info('Scroll ended');
+    }
+  };
+  
 
 const uploadFile = async (page, filename) => {
   const [fileChooser] = await Promise.all([

@@ -5,9 +5,7 @@ const { addProfileImage } = require('./app/profile/services');
 const { generateAiResponse } = require('./app/ai/services');
 const crypto = require('crypto');
 
-const id = "user7";
 const passwd = "123123";
-const email = "test@test9.com";
 const domain = "@test.com";
 const chatName = "asdfasdf";
 const site = "https://bootcampchat-fe.run.goorm.site";
@@ -17,14 +15,62 @@ const findText = "hello";
 const msg = "hello";
 const group = "group_a";
 
+async function registerUser(page) {
+  const id = `${group}_${Date.now()}`
+  const email = id + domain;
+
+  await page.goto(site);
+  await addUser(page, id, passwd, email);
+};
+
+async function loginUser(page) {
+  await registerUser(page);
+};
+
+async function createNewChat(page) {
+  await registerUser(page);
+  await createChat(page, chatName);
+};
+
+async function scrollChat(page) {
+  await registerUser(page);
+  await scrollDown(page);
+};
+
+async function sendMessageToChat(page) {
+  await registerUser(page);
+  await accessChat(page, chatName);
+  await talkChat(page, msg);
+};
+
+async function reactionToMessage(page) {
+  await registerUser(page);
+  await accessChat(page, chatName);
+  await addReactions(page, findText);
+};
+
+async function uploadFileToChat(page) {
+  await registerUser(page);
+  await accessChat(page, chatName);
+  await uploadFile(page, filename);
+};
+
+async function updateProfileImage(page) {
+  await registerUser(page);
+  await addProfileImage(page, filename);
+};
+
+async function generateChatAiResponse(page) {
+  await registerUser(page);
+  await accessChat(page, chatName);
+  await generateAiResponse(page, aiMention);
+};
+
+module.exports = { registerUser, loginUser, createNewChat, scrollChat, sendMessageToChat, reactionToMessage, uploadFileToChat, updateProfileImage, generateChatAiResponse };
+
+/* for test
 let browserInstance = null;
 let pageInstance = null;
-
-async function generateGroupName() {
-  const timestamp = Date.now();
-  const hash = crypto.createHash('sha256').update(timestamp.toString()).digest('hex');
-  return `${group}_${timestamp}`;
-}
 
 const getPage = async () => {
   if (!browserInstance) {
@@ -40,82 +86,25 @@ const getPage = async () => {
   return pageInstance;
 };
 
-async function registerUser(page) {
-  await page.goto(site);
-  id = await generateGroupName();
-  email = id + domain;
-  await addUser(page, id, passwd, email);
+const run = async () => {
+  // await loginUser();
+  // await createNewChat();
+  // await scrollChat();
+  // await sendMessageToChat();
+  // await reactionToMessage();
+  await uploadFileToChat();
+  // await updateProfileImage();
+  // await generateChatAiResponse();
 };
 
-async function loginUser(page) {
-  email, page = await registerUser();
+const main = async () => {
+  await run();
+
+  if (browserInstance) {
+    await browserInstance.close();
+    console.log("Browser closed");
+  }
 };
 
-async function createNewChat(page) {
-  await registerUser(page);
-  await createChat(page, chatName);
-};
-
-async function scrollChat(page) {
-  email, page = await registerUser();
-
-  await scrollDown(page);
-};
-
-async function sendMessageToChat(page) {
-  email, page = await registerUser();
-
-  await accessChat(page, chatName);
-  await talkChat(page, msg);
-};
-
-async function reactionToMessage(page) {
-  email = await registerUser();
-
-  await accessChat(page, chatName);
-  await addReactions(page, findText);
-};
-
-async function uploadFileToChat(page) {
-  email, page = await registerUser();
-
-  await accessChat(page, chatName);
-  await uploadFile(page, filename);
-};
-
-async function updateProfileImage(page) {
-  email, page = await registerUser();
-
-  await addProfileImage(page, filename);
-};
-
-async function generateChatAiResponse(page) {
-  email, page = await registerUser();
-
-  await accessChat(page, chatName);
-  await generateAiResponse(page, aiMention);
-};
-
-// const run = async () => {
-//   // await loginUser();
-//   // await createNewChat();
-//   // await scrollChat();
-//   // await sendMessageToChat();
-//   // await reactionToMessage();
-//   await uploadFileToChat();
-//   // await updateProfileImage();
-//   // await generateChatAiResponse();
-// };
-
-// const main = async () => {
-//   await run();
-
-//   if (browserInstance) {
-//     await browserInstance.close();
-//     console.log("Browser closed");
-//   }
-// };
-
-// main();
-
-module.exports = { registerUser, loginUser, createNewChat, scrollChat, sendMessageToChat, reactionToMessage, uploadFileToChat, updateProfileImage, generateChatAiResponse };
+main();
+*/

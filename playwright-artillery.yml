@@ -14,4 +14,4 @@ config:
 
 scenarios:
   - engine: playwright
-    flowFunction: "afterFlow" 
+    flowFunction: "scrollChat" 
