@@ -1,5 +1,5 @@
 config:
-  target: https://ktb-chat.goorm.io
+  target: https://bootcampchat-fe.run.goorm.site
 
   phases:
   - duration: 1
