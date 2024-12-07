@@ -19,7 +19,13 @@ async function registerUser(page) {
   const id = `${group}_${Date.now()}`
   const email = id + domain;
 
-  await page.goto(site);
+  try {
+    await page.goto(site);
+  } catch (e) {
+    console.error('Error during page navigation:', e);
+    await browser.close();
+  }
+
   await addUser(page, id, passwd, email);
 };
 
