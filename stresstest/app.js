@@ -47,8 +47,8 @@ async function registerUser(page) {
   await addUser(page, id, passwd, email);
 };
 
-const loginUser = async (page) => {
-  await login(page, email, passwd);
+async function loginUser(page) {
+  email, page = await registerUser();
 };
 
 async function createNewChat(page) {
@@ -56,13 +56,13 @@ async function createNewChat(page) {
   await createChat(page, chatName);
 };
 
-const scrollChat = async () => {
+async function scrollChat(page) {
   email, page = await registerUser();
 
   await scrollDown(page);
 };
 
-const sendMessageToChat = async () => {
+async function sendMessageToChat(page) {
   email, page = await registerUser();
 
   await accessChat(page, chatName);
@@ -76,20 +76,20 @@ async function reactionToMessage(page) {
   await addReactions(page, findText);
 };
 
-const uploadFileToChat = async () => {
+async function uploadFileToChat(page) {
   email, page = await registerUser();
 
   await accessChat(page, chatName);
   await uploadFile(page, filename);
 };
 
-const updateProfileImage = async () => {
+async function updateProfileImage(page) {
   email, page = await registerUser();
 
   await addProfileImage(page, filename);
 };
 
-const generateChatAiResponse = async () => {
+async function generateChatAiResponse(page) {
   email, page = await registerUser();
 
   await accessChat(page, chatName);
