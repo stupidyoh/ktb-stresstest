@@ -1,5 +1,5 @@
 config:
-  target: https://bootcampchat-fe.run.goorm.site
+  target: https://ktb-chat-test.goorm.team
 
   phases:
   - duration: 1
@@ -14,4 +14,4 @@ config:
 
 scenarios:
   - engine: playwright
-    flowFunction: "scrollChat" 
+    flowFunction: "uploadFileToChat" 
