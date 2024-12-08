@@ -8,7 +8,7 @@ config:
   engines:
     playwright:
       launchOptions:
-        headless: false
+        headless: true
     
   processor: "./stresstest/app.js"
 
