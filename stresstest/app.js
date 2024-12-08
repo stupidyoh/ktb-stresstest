@@ -35,7 +35,7 @@ async function loginUser(page) {
 
 async function createNewChat(page) {
   await registerUser(page);
-  await createChat(page, chatName);
+  await createChat(page, `${group}_${Date.now()}`);
 };
 
 async function scrollChat(page) {

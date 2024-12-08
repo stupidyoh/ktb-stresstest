@@ -14,4 +14,4 @@ config:
 
 scenarios:
   - engine: playwright
-    flowFunction: "uploadFileToChat" 
+    flowFunction: "createNewChat" 
