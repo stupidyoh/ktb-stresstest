@@ -13,7 +13,7 @@ const filename = './photo/test.jpeg';
 const aiMention = "@wayneAI";
 const findText = "hello";
 const msg = "hello";
-const group = "group_a";
+const group = "group_b";
 
 async function registerUser(page) {
   const id = `${group}_${Date.now()}`
