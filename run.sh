@@ -19,6 +19,7 @@ DURATION=$2
 ARRIVALRATE=$3
 NEW_TARGET="$4"
 TARGET_FILE="playwright-artillery.yml"
+TARGET_APP_FILE="stresstest/app.js"
 
 if [ -z "$NEW_FLOW_FUNCTION" ] || [ -z "$DURATION" ] || [ -z "$ARRIVALRATE" ] || [ -z "$NEW_TARGET" ]; then
   echo "사용법: $0 <새로운 flowFunction 값> <duration 값> <arrivalRate 값> <새로운 target 값>"
@@ -43,6 +44,8 @@ sed -i.bak -E "s/^[[:space:]]*arrivalRate: [0-9]+/    arrivalRate: $ARRIVALRATE/
 
 # target 값 변경 (target 문자열 기반)
 sed -i.bak "s|target: .*|target: $NEW_TARGET|" "$TARGET_FILE"
+
+sed -i.bak "s|const site = .*|const site = \"$NEW_TARGET\";|" "$TARGET_APP_FILE"
 
 echo "flowFunction 값이 \"$NEW_FLOW_FUNCTION\"로, duration이 \"$DURATION\"으로, arrivalRate가 \"$ARRIVALRATE\"로, target이 \"$NEW_TARGET\"로 성공적으로 변경되었습니다!"
 echo "대상 파일: $TARGET_FILE"
