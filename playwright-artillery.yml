@@ -1,9 +1,9 @@
 config:
-  target: https://ktb-chat-test.goorm.team/
+  target: http://goorm-ktb-002.goorm.team/
 
   phases:
-  - duration: 1
-    arrivalRate: 1
+  - duration: 100
+    arrivalRate: 3
 
   engines:
     playwright:

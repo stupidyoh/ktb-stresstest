@@ -51,5 +51,5 @@ echo "flowFunction 값이 \"$NEW_FLOW_FUNCTION\"로, duration이 \"$DURATION\"�
 echo "대상 파일: $TARGET_FILE"
 
 # 실행
-artillery run "$TARGET_FILE"
-
+artillery run "$TARGET_FILE" --output stress-test.json
+artillery report stress-test.json
