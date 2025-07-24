@@ -1,0 +1,407 @@
+{
+  "aggregate": {
+    "counters": {
+      "vusers.created_by_name.0": 1,
+      "vusers.created": 1,
+      "browser.page.codes.404": 2,
+      "browser.page.codes.200": 42,
+      "browser.http_requests": 46,
+      "browser.page.codes.201": 1,
+      "browser.page.codes.304": 1,
+      "errors.locator.click: Timeout 30000ms exceeded.": 1,
+      "vusers.failed": 1
+    },
+    "rates": {},
+    "firstCounterAt": 1753255831182,
+    "firstHistogramAt": 1753255851906,
+    "lastCounterAt": 1753255887170,
+    "lastHistogramAt": 1753255857408,
+    "firstMetricAt": 1753255831182,
+    "lastMetricAt": 1753255887170,
+    "period": 1753255880000,
+    "summaries": {
+      "browser.page.TTFB.https://ktb-chat-test.goorm.team/$%7BprocessEnvironment.baseUrl%7D": {
+        "min": 23.6,
+        "max": 427.7,
+        "count": 2,
+        "mean": 225.7,
+        "p50": 23.8,
+        "median": 23.8,
+        "p75": 23.8,
+        "p90": 23.8,
+        "p95": 23.8,
+        "p99": 23.8,
+        "p999": 23.8
+      },
+      "browser.page.FCP.https://ktb-chat-test.goorm.team/$%7BprocessEnvironment.baseUrl%7D": {
+        "min": 1676,
+        "max": 16816,
+        "count": 2,
+        "mean": 9246,
+        "p50": 1686.1,
+        "median": 1686.1,
+        "p75": 1686.1,
+        "p90": 1686.1,
+        "p95": 1686.1,
+        "p99": 1686.1,
+        "p999": 1686.1
+      },
+      "browser.page.LCP.https://ktb-chat-test.goorm.team/$%7BprocessEnvironment.baseUrl%7D": {
+        "min": 16960,
+        "max": 16960,
+        "count": 1,
+        "mean": 16960,
+        "p50": 16819.2,
+        "median": 16819.2,
+        "p75": 16819.2,
+        "p90": 16819.2,
+        "p95": 16819.2,
+        "p99": 16819.2,
+        "p999": 16819.2
+      },
+      "browser.page.FID.https://ktb-chat-test.goorm.team/$%7BprocessEnvironment.baseUrl%7D": {
+        "min": 18.8,
+        "max": 18.8,
+        "count": 1,
+        "mean": 18.8,
+        "p50": 18.7,
+        "median": 18.7,
+        "p75": 18.7,
+        "p90": 18.7,
+        "p95": 18.7,
+        "p99": 18.7,
+        "p999": 18.7
+      },
+      "browser.page.INP.https://ktb-chat-test.goorm.team/chat-rooms": {
+        "min": 104,
+        "max": 104,
+        "count": 1,
+        "mean": 104,
+        "p50": 104.6,
+        "median": 104.6,
+        "p75": 104.6,
+        "p90": 104.6,
+        "p95": 104.6,
+        "p99": 104.6,
+        "p999": 104.6
+      },
+      "browser.page.CLS.https://ktb-chat-test.goorm.team/chat-rooms": {
+        "min": 0,
+        "max": 0,
+        "count": 1,
+        "mean": 0,
+        "p50": 0,
+        "median": 0,
+        "p75": 0,
+        "p90": 0,
+        "p95": 0,
+        "p99": 0,
+        "p999": 0
+      }
+    },
+    "histograms": {
+      "browser.page.TTFB.https://ktb-chat-test.goorm.team/$%7BprocessEnvironment.baseUrl%7D": {
+        "min": 23.6,
+        "max": 427.7,
+        "count": 2,
+        "mean": 225.7,
+        "p50": 23.8,
+        "median": 23.8,
+        "p75": 23.8,
+        "p90": 23.8,
+        "p95": 23.8,
+        "p99": 23.8,
+        "p999": 23.8
+      },
+      "browser.page.FCP.https://ktb-chat-test.goorm.team/$%7BprocessEnvironment.baseUrl%7D": {
+        "min": 1676,
+        "max": 16816,
+        "count": 2,
+        "mean": 9246,
+        "p50": 1686.1,
+        "median": 1686.1,
+        "p75": 1686.1,
+        "p90": 1686.1,
+        "p95": 1686.1,
+        "p99": 1686.1,
+        "p999": 1686.1
+      },
+      "browser.page.LCP.https://ktb-chat-test.goorm.team/$%7BprocessEnvironment.baseUrl%7D": {
+        "min": 16960,
+        "max": 16960,
+        "count": 1,
+        "mean": 16960,
+        "p50": 16819.2,
+        "median": 16819.2,
+        "p75": 16819.2,
+        "p90": 16819.2,
+        "p95": 16819.2,
+        "p99": 16819.2,
+        "p999": 16819.2
+      },
+      "browser.page.FID.https://ktb-chat-test.goorm.team/$%7BprocessEnvironment.baseUrl%7D": {
+        "min": 18.8,
+        "max": 18.8,
+        "count": 1,
+        "mean": 18.8,
+        "p50": 18.7,
+        "median": 18.7,
+        "p75": 18.7,
+        "p90": 18.7,
+        "p95": 18.7,
+        "p99": 18.7,
+        "p999": 18.7
+      },
+      "browser.page.INP.https://ktb-chat-test.goorm.team/chat-rooms": {
+        "min": 104,
+        "max": 104,
+        "count": 1,
+        "mean": 104,
+        "p50": 104.6,
+        "median": 104.6,
+        "p75": 104.6,
+        "p90": 104.6,
+        "p95": 104.6,
+        "p99": 104.6,
+        "p999": 104.6
+      },
+      "browser.page.CLS.https://ktb-chat-test.goorm.team/chat-rooms": {
+        "min": 0,
+        "max": 0,
+        "count": 1,
+        "mean": 0,
+        "p50": 0,
+        "median": 0,
+        "p75": 0,
+        "p90": 0,
+        "p95": 0,
+        "p99": 0,
+        "p999": 0
+      }
+    }
+  },
+  "intermediate": [
+    {
+      "counters": {
+        "vusers.created_by_name.0": 1,
+        "vusers.created": 1,
+        "browser.page.codes.404": 1,
+        "browser.page.codes.200": 4,
+        "browser.http_requests": 4
+      },
+      "rates": {},
+      "firstCounterAt": 1753255831182,
+      "lastCounterAt": 1753255839035,
+      "firstMetricAt": 1753255831182,
+      "lastMetricAt": 1753255839035,
+      "period": "1753255830000",
+      "summaries": {},
+      "histograms": {}
+    },
+    {
+      "counters": {
+        "browser.page.codes.200": 6,
+        "browser.http_requests": 7
+      },
+      "rates": {},
+      "firstCounterAt": 1753255844656,
+      "lastCounterAt": 1753255849925,
+      "firstMetricAt": 1753255844656,
+      "lastMetricAt": 1753255849925,
+      "period": "1753255840000",
+      "summaries": {},
+      "histograms": {}
+    },
+    {
+      "counters": {
+        "browser.page.codes.200": 32,
+        "browser.http_requests": 35,
+        "browser.page.codes.201": 1,
+        "browser.page.codes.404": 1,
+        "browser.page.codes.304": 1
+      },
+      "rates": {},
+      "firstCounterAt": 1753255851905,
+      "firstHistogramAt": 1753255851906,
+      "lastCounterAt": 1753255857335,
+      "lastHistogramAt": 1753255857408,
+      "firstMetricAt": 1753255851905,
+      "lastMetricAt": 1753255857408,
+      "period": "1753255850000",
+      "summaries": {
+        "browser.page.TTFB.https://ktb-chat-test.goorm.team/$%7BprocessEnvironment.baseUrl%7D": {
+          "min": 23.6,
+          "max": 427.7,
+          "count": 2,
+          "mean": 225.7,
+          "p50": 23.8,
+          "median": 23.8,
+          "p75": 23.8,
+          "p90": 23.8,
+          "p95": 23.8,
+          "p99": 23.8,
+          "p999": 23.8
+        },
+        "browser.page.FCP.https://ktb-chat-test.goorm.team/$%7BprocessEnvironment.baseUrl%7D": {
+          "min": 1676,
+          "max": 16816,
+          "count": 2,
+          "mean": 9246,
+          "p50": 1686.1,
+          "median": 1686.1,
+          "p75": 1686.1,
+          "p90": 1686.1,
+          "p95": 1686.1,
+          "p99": 1686.1,
+          "p999": 1686.1
+        },
+        "browser.page.LCP.https://ktb-chat-test.goorm.team/$%7BprocessEnvironment.baseUrl%7D": {
+          "min": 16960,
+          "max": 16960,
+          "count": 1,
+          "mean": 16960,
+          "p50": 16819.2,
+          "median": 16819.2,
+          "p75": 16819.2,
+          "p90": 16819.2,
+          "p95": 16819.2,
+          "p99": 16819.2,
+          "p999": 16819.2
+        },
+        "browser.page.FID.https://ktb-chat-test.goorm.team/$%7BprocessEnvironment.baseUrl%7D": {
+          "min": 18.8,
+          "max": 18.8,
+          "count": 1,
+          "mean": 18.8,
+          "p50": 18.7,
+          "median": 18.7,
+          "p75": 18.7,
+          "p90": 18.7,
+          "p95": 18.7,
+          "p99": 18.7,
+          "p999": 18.7
+        },
+        "browser.page.INP.https://ktb-chat-test.goorm.team/chat-rooms": {
+          "min": 104,
+          "max": 104,
+          "count": 1,
+          "mean": 104,
+          "p50": 104.6,
+          "median": 104.6,
+          "p75": 104.6,
+          "p90": 104.6,
+          "p95": 104.6,
+          "p99": 104.6,
+          "p999": 104.6
+        },
+        "browser.page.CLS.https://ktb-chat-test.goorm.team/chat-rooms": {
+          "min": 0,
+          "max": 0,
+          "count": 1,
+          "mean": 0,
+          "p50": 0,
+          "median": 0,
+          "p75": 0,
+          "p90": 0,
+          "p95": 0,
+          "p99": 0,
+          "p999": 0
+        }
+      },
+      "histograms": {
+        "browser.page.TTFB.https://ktb-chat-test.goorm.team/$%7BprocessEnvironment.baseUrl%7D": {
+          "min": 23.6,
+          "max": 427.7,
+          "count": 2,
+          "mean": 225.7,
+          "p50": 23.8,
+          "median": 23.8,
+          "p75": 23.8,
+          "p90": 23.8,
+          "p95": 23.8,
+          "p99": 23.8,
+          "p999": 23.8
+        },
+        "browser.page.FCP.https://ktb-chat-test.goorm.team/$%7BprocessEnvironment.baseUrl%7D": {
+          "min": 1676,
+          "max": 16816,
+          "count": 2,
+          "mean": 9246,
+          "p50": 1686.1,
+          "median": 1686.1,
+          "p75": 1686.1,
+          "p90": 1686.1,
+          "p95": 1686.1,
+          "p99": 1686.1,
+          "p999": 1686.1
+        },
+        "browser.page.LCP.https://ktb-chat-test.goorm.team/$%7BprocessEnvironment.baseUrl%7D": {
+          "min": 16960,
+          "max": 16960,
+          "count": 1,
+          "mean": 16960,
+          "p50": 16819.2,
+          "median": 16819.2,
+          "p75": 16819.2,
+          "p90": 16819.2,
+          "p95": 16819.2,
+          "p99": 16819.2,
+          "p999": 16819.2
+        },
+        "browser.page.FID.https://ktb-chat-test.goorm.team/$%7BprocessEnvironment.baseUrl%7D": {
+          "min": 18.8,
+          "max": 18.8,
+          "count": 1,
+          "mean": 18.8,
+          "p50": 18.7,
+          "median": 18.7,
+          "p75": 18.7,
+          "p90": 18.7,
+          "p95": 18.7,
+          "p99": 18.7,
+          "p999": 18.7
+        },
+        "browser.page.INP.https://ktb-chat-test.goorm.team/chat-rooms": {
+          "min": 104,
+          "max": 104,
+          "count": 1,
+          "mean": 104,
+          "p50": 104.6,
+          "median": 104.6,
+          "p75": 104.6,
+          "p90": 104.6,
+          "p95": 104.6,
+          "p99": 104.6,
+          "p999": 104.6
+        },
+        "browser.page.CLS.https://ktb-chat-test.goorm.team/chat-rooms": {
+          "min": 0,
+          "max": 0,
+          "count": 1,
+          "mean": 0,
+          "p50": 0,
+          "median": 0,
+          "p75": 0,
+          "p90": 0,
+          "p95": 0,
+          "p99": 0,
+          "p999": 0
+        }
+      }
+    },
+    {
+      "counters": {
+        "errors.locator.click: Timeout 30000ms exceeded.": 1,
+        "vusers.failed": 1
+      },
+      "rates": {},
+      "firstCounterAt": 1753255887170,
+      "lastCounterAt": 1753255887170,
+      "firstMetricAt": 1753255887170,
+      "lastMetricAt": 1753255887170,
+      "period": "1753255880000",
+      "summaries": {},
+      "histograms": {}
+    }
+  ]
+}

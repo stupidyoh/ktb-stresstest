@@ -1,17 +1,39 @@
+## NOTE: Headless가 Off된 Local 테스트 용도
 config:
-  target: http://goorm-ktb-002.goorm.team/
+  target: "{{ $env.BASE_URL }}"
 
   phases:
-  - duration: 100
-    arrivalRate: 3
+    - name: phase1
+      duration: "{{ $env.PHASE1_DURATION }}"
+      arrivalRate: "{{ $env.PHASE1_ARRIVAL_RATE }}"
+    ## NOTE: Phase2가 필요하면 활성화
+    # - name: phase2
+    #   duration: "{{ processEnvironment.PHASE2_DURATION }}"
+    #   arrivalRate: "{{ processEnvironment.PHASE2_ARRIVAL_RATE }}"
 
   engines:
     playwright:
       launchOptions:
         headless: true
-    
+
   processor: "./stresstest/app.js"
+
+  variables:
+    baseUrl: "{{ target }}"
+
+  # plugins:
+  #   publish-metrics:
+  #     - type: "open-telemetry"
+  #       serviceName: "ktb-stress-test"
+  #       resourceAttributes:
+  #         "service.name": "ktb-stress-test"
+  #         "service.instance.id": "{{ $processEnvironment.HOSTNAME }}"
+  #         "test.id": "{{ $processEnvironment.TEST_ID }}"
+  #         "test.phase": "1"
+  #       metrics:
+  #         exporter: "otlp-http"
+  #         endpoint: "{{ $processEnvironment.OLTP_METRICS_ENDPOINTS }}"
 
 scenarios:
   - engine: playwright
-    flowFunction: "loginUser" 
+    flowFunction: "runAllUserActionsSequentially"
