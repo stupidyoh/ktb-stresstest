@@ -3,7 +3,7 @@ config:
 
   phases:
     - duration: 1
-      arrivalRate: 8
+      arrivalRate: 4
 
   engines:
     playwright:
@@ -16,9 +16,5 @@ config:
     baseUrl: "{{ target }}"
 
 scenarios:
-  # - engine: playwright
-  #   flowFunction: "loginUser"
-  # - engine: playwright
-  #   flowFunction: "createNewChat"
   - engine: playwright
     flowFunction: "runAllUserActionsSequentially"
