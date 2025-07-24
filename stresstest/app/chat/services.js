@@ -29,7 +29,7 @@ const talkChat = async (page, text) => {
   const messageInput = page.getByPlaceholder('메시지를 입력하세요... (@를 입력하여 멘션,');
   const sendButton = page.getByRole('button', { name: '메시지 보내기' });
 
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 5; i++) {
     await messageInput.fill(text);
     await sendButton.click();
   }

@@ -6,7 +6,7 @@ const { generateAiResponse } = require('./app/ai/services');
 const passwd = "123123!@";
 const domain = "@test.com";
 
-const filename = './photo/test.jpeg';
+const filename = './files/test_image.jpeg';
 const aiMention = "@wayneAI";
 const msg = "hello";
 const group = "group_b";
@@ -63,11 +63,51 @@ async function generateChatAiResponse(page, id) {
   await generateAiResponse(page, aiMention);
 };
 
+// 패턴 단일 테스트
 async function wrapperFunction(page) {
   const id = `${group}_${Date.now()}`;
 
-  await loginUser(page, id);
+  // await registerUser(page, id);
+  // await loginUser(page, id);
+  // await createNewChat(page, id);
+  // await scrollChat(page, id);
+  await sendMessageToChat(page, id);
+  // await reactionToMessage(page, id);
+  // await uploadFileToChat(page, id);
+  // await updateProfileImage(page, id);
+  // await generateChatAiResponse(page, id);
+
 }
 
+// 채팅방에서 각종 말하기
+async function wrapperFunctionChat(page) {
+  const id = `${group}_${Date.now()}`;
 
-module.exports = { wrapperFunction };
+  await sendMessageToChat(page, id)
+  await uploadFile(page, filename);
+  await generateAiResponse(page, aiMention);
+
+  console.log(`모든 채팅방 기능 완료`);
+
+}
+
+// 행동 반복하기
+async function wrapperFunctionRepeat(page) {
+  const id = `${group}_${Date.now()}`;
+
+  await createNewChat(page, id);
+  const repeatCount = 5; // FIXME: 원하는 반복횟수로 수정
+
+  for (let i = 0; i < repeatCount; i++) {
+    console.log(`${id}: 시작 (${i + 1}/${repeatCount})`);
+
+    await talkChat(page, msg);;
+
+    console.log(`${id}: 완료`);
+    
+    await page.waitForTimeout(1000);
+  }
+
+}
+
+module.exports = { wrapperFunction, wrapperFunctionChat, wrapperFunctionRepeat };

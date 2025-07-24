@@ -1,5 +1,5 @@
 config:
-  target: <your_target_url> #FIXME: Update with your target URL
+  target: http://localhost:3000 
 
   phases:
     - duration: 1
@@ -17,4 +17,4 @@ config:
 
 scenarios:
   - engine: playwright
-    flowFunction: "wrapperFunction"
+    flowFunction: wrapperFunctionChat
