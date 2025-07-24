@@ -7,13 +7,15 @@ const crypto = require('crypto');
 
 const passwd = "123123";
 const domain = "@test.com";
-const chatName = "asdfasdf";
-const site = "http://goorm-ktb-002.goorm.team/";
+// const chatName = "asdfasdf";
+// const site = "https://ktb-chat-test.goorm.team/";
+const site = "${$env.baseUrl}" || "https://example.com";
 const filename = './photo/test.jpeg';
 const aiMention = "@wayneAI";
 const findText = "hello";
 const msg = "hello";
 const group = "group_b";
+const chatName = `${group}_${Date.now()}`;
 
 async function registerUser(page) {
   const id = `${group}_${Date.now()}`
@@ -34,45 +36,57 @@ async function loginUser(page) {
 };
 
 async function createNewChat(page) {
-  await registerUser(page);
-  await createChat(page, `${group}_${Date.now()}`);
+  // await registerUser(page);
+  await createChat(page, chatName);
 };
 
 async function scrollChat(page) {
-  await registerUser(page);
+  // await registerUser(page);
   await scrollDown(page);
 };
 
 async function sendMessageToChat(page) {
-  await registerUser(page);
+  // await registerUser(page);
   await accessChat(page, chatName);
   await talkChat(page, msg);
 };
 
 async function reactionToMessage(page) {
-  await registerUser(page);
-  await accessChat(page, chatName);
+  // await registerUser(page);
+  // await accessChat(page, chatName);
   await addReactions(page, findText);
 };
 
 async function uploadFileToChat(page) {
-  await registerUser(page);
-  await accessChat(page, chatName);
+  // await registerUser(page);
+  // await accessChat(page, chatName);
   await uploadFile(page, filename);
 };
 
 async function updateProfileImage(page) {
-  await registerUser(page);
+  // await registerUser(page);
   await addProfileImage(page, filename);
 };
 
 async function generateChatAiResponse(page) {
-  await registerUser(page);
+  // await registerUser(page);
+  await page.goto(site + '/chat-rooms');
   await accessChat(page, chatName);
   await generateAiResponse(page, aiMention);
 };
 
-module.exports = { registerUser, loginUser, createNewChat, scrollChat, sendMessageToChat, reactionToMessage, uploadFileToChat, updateProfileImage, generateChatAiResponse };
+async function runAllUserActionsSequentially(page) {
+  await loginUser(page);
+  await createNewChat(page);
+  await scrollChat(page);
+  await sendMessageToChat(page);
+  await reactionToMessage(page);
+  await uploadFileToChat(page);
+  await updateProfileImage(page);
+  await generateChatAiResponse(page);
+}
+
+module.exports = { registerUser, loginUser, createNewChat, scrollChat, sendMessageToChat, reactionToMessage, uploadFileToChat, updateProfileImage, generateChatAiResponse, runAllUserActionsSequentially };
 
 /* for test
 let browserInstance = null;
