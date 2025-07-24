@@ -17,7 +17,6 @@ const domain = "@test.com";
 
 const filename = './photo/test.jpeg';
 const aiMention = "@wayneAI";
-const findText = "hello";
 const msg = "hello";
 const group = "group_b";
 
@@ -58,7 +57,7 @@ async function sendMessageToChat(page, id) {
 async function reactionToMessage(page) {
   // await registerUser(page);
   // await accessChat(page, chatName);
-  await addReactions(page, findText);
+  await addReactions(page, msg);
 };
 
 async function uploadFileToChat(page) {
