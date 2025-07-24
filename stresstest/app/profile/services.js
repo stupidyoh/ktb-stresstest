@@ -2,11 +2,10 @@ const { expect } = require('@playwright/test');
 const path = require('path');
 
 const addProfileImage = async (page, filename) => {
-  await page.locator('//*[@id="__next"]/div/nav/div/div/div[3]/div/button').click();
-  await page.locator('//*[@id="__next"]/div/nav/div/div/div[3]/div/div/button[1]').click();
+  await page.getByRole('button', { name: '프로필' }).click();
 
-  await page.waitForTimeout(3000);
-  const cameraButton = await page.locator('button[class*="vapor-Button-md"]');
+  await page.waitForTimeout(2000);
+  const cameraButton = await page.getByRole('button', { name: '이미지 변경' })
 
   console.log(page.url());
   const [fileChooser] = await Promise.all([

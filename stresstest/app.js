@@ -1,11 +1,11 @@
 const { chromium } = require('playwright');
-const { addUser, login } = require('./app/auth/services');
+const { addUser, login, logout } = require('./app/auth/services');
 const { createChat, talkChat, accessChat, scrollDown, addReactions, uploadFile } = require('./app/chat/services');
 const { addProfileImage } = require('./app/profile/services');
 const { generateAiResponse } = require('./app/ai/services');
 const crypto = require('crypto');
 
-const passwd = "123123";
+const passwd = "123123!@";
 const domain = "@test.com";
 
 // NOTE: chatName을 지역변수로 변경
@@ -45,6 +45,7 @@ async function createNewChat(page, id) {
 
 async function scrollChat(page) {
   // await registerUser(page);
+  await page.goto("/chat-rooms");
   await scrollDown(page);
 };
 
@@ -87,8 +88,9 @@ async function runAllUserActionsSequentially(page) {
   await scrollChat(page);
   await sendMessageToChat(page, id);
   await reactionToMessage(page);
-  await uploadFileToChat(page);
+  // await uploadFileToChat(page);
   await updateProfileImage(page);
+  await logout(page);
 }
 
 module.exports = { registerUser, loginUser, createNewChat, scrollChat, sendMessageToChat, reactionToMessage, uploadFileToChat, updateProfileImage, runAllUserActionsSequentially };
