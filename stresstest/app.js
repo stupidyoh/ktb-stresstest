@@ -7,22 +7,25 @@ const crypto = require('crypto');
 
 const passwd = "123123";
 const domain = "@test.com";
+
+// NOTE: chatName을 지역변수로 변경
 // const chatName = "asdfasdf";
+
+// NOTE: site명은 Artillery에서 config.target으로 받도록 변경
 // const site = "https://ktb-chat-test.goorm.team/";
-const site = "${$env.baseUrl}" || "https://example.com";
+// const site = "${$env.baseUrl}" || "https://example.com";
+
 const filename = './photo/test.jpeg';
 const aiMention = "@wayneAI";
 const findText = "hello";
 const msg = "hello";
 const group = "group_b";
-const chatName = `${group}_${Date.now()}`;
 
-async function registerUser(page) {
-  const id = `${group}_${Date.now()}`
+async function registerUser(page, id) {
   const email = id + domain;
 
   try {
-    await page.goto(site);
+    await page.goto("/");
   } catch (e) {
     console.error('Error during page navigation:', e);
     await browser.close();
@@ -31,13 +34,13 @@ async function registerUser(page) {
   await addUser(page, id, passwd, email);
 };
 
-async function loginUser(page) {
-  await registerUser(page);
+async function loginUser(page, id) {
+  await registerUser(page, id);
 };
 
-async function createNewChat(page) {
+async function createNewChat(page, id) {
   // await registerUser(page);
-  await createChat(page, chatName);
+  await createChat(page, id);
 };
 
 async function scrollChat(page) {
@@ -45,9 +48,9 @@ async function scrollChat(page) {
   await scrollDown(page);
 };
 
-async function sendMessageToChat(page) {
+async function sendMessageToChat(page, id) {
   // await registerUser(page);
-  await accessChat(page, chatName);
+  await accessChat(page, id);
   await talkChat(page, msg);
 };
 
@@ -77,14 +80,15 @@ async function updateProfileImage(page) {
 // };
 
 async function runAllUserActionsSequentially(page) {
-  await loginUser(page);
-  await createNewChat(page);
+  const id = `${group}_${Date.now()}`;
+
+  await loginUser(page, id);
+  await createNewChat(page, id);
   await scrollChat(page);
-  await sendMessageToChat(page);
+  await sendMessageToChat(page, id);
   await reactionToMessage(page);
   await uploadFileToChat(page);
   await updateProfileImage(page);
-  // await generateChatAiResponse(page);
 }
 
 module.exports = { registerUser, loginUser, createNewChat, scrollChat, sendMessageToChat, reactionToMessage, uploadFileToChat, updateProfileImage, runAllUserActionsSequentially };
