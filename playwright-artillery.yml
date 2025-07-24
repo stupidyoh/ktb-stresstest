@@ -1,51 +1,20 @@
 config:
-  target: "{{ $env.BASE_URL }}"
+  target: <your_target_url> #FIXME: Update with your target URL
 
   phases:
-    - name: ramp-up-phase-1
-      duration: "{{ $env.RAMP_DURATION }}"
-      arrivalRate: "{{ $env.RAMP_ARRIVAL_RATE }}" 
-    - name: sustain-phase-1
-      duration: "{{ $env.SUSTAIN_DURATION }}"
-      arrivalRate: "{{ $env.SUSTAIN_ARRIVAL_RATE }}"
-    
-    - name: ramp-up-phase-2
-      duration: "{{ $env.RAMP_DURATION }}"
-      arrivalRate: "{{ $env.RAMP_ARRIVAL_RATE }}"
-    - name: sustain-phase-2
-      duration: "{{ $env.SUSTAIN_DURATION }}"
-      arrivalRate: "{{ $env.SUSTAIN_ARRIVAL_RATE }}"
-
-    - name: ramp-up-phase-3
-      duration: "{{ $env.RAMP_DURATION }}"
-      arrivalRate: "{{ $env.RAMP_ARRIVAL_RATE }}"
-    - name: sustain-phase-3
-      duration: "{{ $env.SUSTAIN_DURATION }}"
-      arrivalRate: "{{ $env.SUSTAIN_ARRIVAL_RATE }}"
+    - duration: 1
+      arrivalRate: 1
 
   engines:
     playwright:
       launchOptions:
-        headless: true
+        headless: false # FIXME: Update with your launch options
 
   processor: "./stresstest/app.js"
 
   variables:
     baseUrl: "{{ target }}"
 
-  # plugins:
-  #   publish-metrics:
-  #     - type: "open-telemetry"
-  #       serviceName: "ktb-stress-test"
-  #       resourceAttributes:
-  #         "service.name": "ktb-stress-test"
-  #         "service.instance.id": "{{ $processEnvironment.HOSTNAME }}"
-  #         "test.id": "{{ $processEnvironment.TEST_ID }}"
-  #         "test.phase": "1"
-  #       metrics:
-  #         exporter: "otlp-http"
-  #         endpoint: "{{ $processEnvironment.OLTP_METRICS_ENDPOINTS }}"
-
 scenarios:
   - engine: playwright
-    flowFunction: "runAllUserActionsSequentially"
+    flowFunction: "wrapperFunction"

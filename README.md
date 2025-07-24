@@ -59,6 +59,3 @@
           - duration: 1
             arrivalRate: 1
         ```
-
-* 하나의 탭에서 처리 가능, 필요시 @jerry.kim 요청
-* 모든 기능 한번에 동작 가능, 필요시 @jerry.kim 요청
