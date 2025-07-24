@@ -7,4 +7,4 @@ run-artillery-head:
 	artillery run playwright-artillery-head.yml
 
 build-docker:
-	docker buildx build --platform linux/amd64 -t $AWS_ECR_REPO/$IMAGE_NAME:$IMAGE_TAG .
+	docker buildx build --platform linux/amd64 -t $(AWS_ECR_REPO)/$(IMAGE_NAME):$(IMAGE_TAG) .
